@@ -15,7 +15,7 @@ jobs:
 
       - name: Clone target repo
         run: |
-          git clone https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/liviarosalem/Methane-2026-Copernicus-paper.git target-repo
+          git clone https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/liviarosalem/Methane2026_CopernicusPaper.git target-repo
 
       - name: Copy .bib file
         run: |
