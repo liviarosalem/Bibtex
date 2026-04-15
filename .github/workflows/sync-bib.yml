@@ -1,0 +1,31 @@
+name: Sync BibTeX to Overleaf Repo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Bibtex repo
+        uses: actions/checkout@v3
+
+      - name: Clone target repo
+        run: |
+          git clone https://x-access-token:${{ secrets.TARGET_REPO_TOKEN }}@github.com/liviarosalem/Methane2026_CopernicusPaper.git target-repo
+
+      - name: Copy .bib file
+        run: |
+          cp references.bib target-repo/references.bib
+
+      - name: Commit and push
+        run: |
+          cd target-repo
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add references.bib
+          git commit -m "Auto-update references.bib" || echo "No changes"
+          git push
